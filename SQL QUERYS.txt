@@ -14,9 +14,9 @@ weight INT,
 PRIMARY KEY(id)
 );
 
-CREATE TABLE coctail_to_ingredient (
+CREATE TABLE cocktail_to_ingredient (
 id INT NOT NULL AUTO_INCREMENT,
-coctailId INT NOT NULL,
+cocktailId INT NOT NULL,
 ingredientId INT NOT NULL,
 PRIMARY KEY(id)
 );
@@ -28,7 +28,7 @@ password INT NOT NULL,
 PRIMARY KEY(id)
 );
 
-CREATE TABLE User_to_Coctail (
+CREATE TABLE User_to_Cocktail (
 id INT NOT NULL AUTO_INCREMENT,
 username INT NOT NULL,
 cocktailId INT NOT NULL,
