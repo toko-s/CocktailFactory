@@ -1,9 +1,4 @@
 <html>
-<<<<<<< HEAD
-<body>
-<h2>Hello World!</h2>
-</body>
-=======
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
@@ -92,6 +87,4 @@
 </body>
 
 <script src="https://kit.fontawesome.com/dcb70c1fc2.js" crossorigin="anonymous"></script>
-
->>>>>>> origin/main
 </html>
