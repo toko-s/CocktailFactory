@@ -1,13 +1,13 @@
 package Model;
 
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@ToString
 public class Ingredient {
     private String name;
-    private int weight;
-    private int price;
+    private double weight;
+    private double price;
 
-    public Ingredient(String name, int weight, int price) {
-        this.price = price;
-        this.weight = weight;
-        this.price = price;
-    }
 }
