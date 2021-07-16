@@ -1,4 +1,4 @@
-CREATE TABLE Ingredient (
+CREATE TABLE Cocktail (
 id INT NOT NULL AUTO_INCREMENT,
 name varchar(45) NOT NULL,
 rating INT,
