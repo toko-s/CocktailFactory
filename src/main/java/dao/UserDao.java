@@ -21,7 +21,7 @@ public class UserDao {
 
     private UserDao() {
         try {
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost/cocktailfactory?user=root&password=2412");
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost/cocktailfactory?user=root&password=Gamersaninja1");
         } catch (Exception ignored) {
         }
     }

@@ -47,7 +47,7 @@ public class CocktailDao {
 
     private ArrayList<Ingredient> getIngredients(int id) throws SQLException {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM coctail_to_ingredient where cocktailId = ?");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktail_to_ingredient where cocktailId = ?");
 
         statement.setInt(1,id);
         ResultSet resultConnector = statement.executeQuery();
