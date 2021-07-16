@@ -1,6 +1,6 @@
 package dao;
 
-import Model.Cocktail;
+import model.Cocktail;
 
 import java.sql.SQLException;
 import java.util.List;

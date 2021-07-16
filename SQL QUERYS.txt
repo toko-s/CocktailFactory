@@ -1,7 +1,7 @@
 CREATE TABLE Cocktail (
 id INT NOT NULL AUTO_INCREMENT,
 name varchar(45) NOT NULL,
-rating INT,
+rating DOUBLE,
 voters INT,
 PRIMARY KEY(id)
 );
@@ -9,8 +9,8 @@ PRIMARY KEY(id)
 CREATE TABLE Ingredient (
 id INT NOT NULL AUTO_INCREMENT,
 name varchar(45) NOT NULL,
-price INT,
-weight INT,
+price DOUBLE,
+weight DOUBLE,
 PRIMARY KEY(id)
 );
 
@@ -23,14 +23,14 @@ PRIMARY KEY(id)
 
 CREATE TABLE user (
 id INT NOT NULL AUTO_INCREMENT,
-username INT NOT NULL,
-password INT NOT NULL,
+username varchar(50) NOT NULL,
+password varchar(50) NOT NULL,
 PRIMARY KEY(id)
 );
 
 CREATE TABLE User_to_Cocktail (
 id INT NOT NULL AUTO_INCREMENT,
-username INT NOT NULL,
+userId INT NOT NULL,
 cocktailId INT NOT NULL,
 PRIMARY KEY(id)
 );

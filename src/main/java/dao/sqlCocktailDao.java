@@ -1,9 +1,8 @@
 package dao;
 
-import Model.Cocktail;
-import Model.Ingredient;
+import model.Cocktail;
+import model.Ingredient;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 
