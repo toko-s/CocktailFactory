@@ -3,18 +3,19 @@ package dao;
 import model.Cocktail;
 import model.Ingredient;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class sqlCocktailDao {
+public class CocktailDao {
 
     public Connection con;
 
-    public sqlCocktailDao() {
+    public CocktailDao() {
         try {
             //Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/CoctailFactory","root","Gamersaninja1");
+                    "jdbc:mysql://localhost:3306/CocktailFactory","root","Gamersaninja1");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,31 +47,37 @@ public class sqlCocktailDao {
 
     private ArrayList<Ingredient> getIngredients(int id) throws SQLException {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM coctail_to_ingredient where coctailId = ?");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM coctail_to_ingredient where cocktailId = ?");
 
         statement.setInt(1,id);
-        ResultSet resultIngredients = statement.executeQuery();
+        ResultSet resultConnector = statement.executeQuery();
 
-        while(resultIngredients.next()) {
-            System.out.println(resultIngredients);
-            //ingredients.add(convertToIngredient(resultIngredients));
+        while(resultConnector.next()) {
+            System.out.println(resultConnector);
+            ingredients.add(collectIngredient(resultConnector));
         }
 
         return ingredients;
     }
 
-    private Ingredient convertToIngredient(ResultSet resultIngredients) throws SQLException {
+    private Ingredient collectIngredient(ResultSet resultConnector) throws SQLException {
         Ingredient ingredient = new Ingredient();
 
-        ingredient.setName(resultIngredients.getString("name"));
-        ingredient.setWeight(resultIngredients.getDouble("weight"));
-        ingredient.setPrice(resultIngredients.getDouble("price"));
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM ingredient where id = ?");
+        int id = resultConnector.getInt("ingredientId");
+        statement.setInt(1,id);
+
+        ResultSet resultIngredient = statement.executeQuery();
+
+        resultIngredient.next();
+
+        ingredient.setName(resultIngredient.getString("name"));
+        ingredient.setWeight(resultIngredient.getDouble("weight"));
+        ingredient.setPrice(resultIngredient.getDouble("price"));
 
         ingredient.toString();
 
         return ingredient;
     }
-
-
 }
 

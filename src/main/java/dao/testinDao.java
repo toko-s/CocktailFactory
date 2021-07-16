@@ -8,7 +8,7 @@ import java.util.List;
 
 public class testinDao {
     public static void main(String[] args) {
-        sqlCocktailDao dao = new sqlCocktailDao();
+        CocktailDao dao = new CocktailDao();
         try {
             List<Cocktail> l = dao.getCocktails();
             for (Cocktail x : l ){
