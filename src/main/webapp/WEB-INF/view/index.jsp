@@ -2,7 +2,7 @@
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="../../style/style.css">
 </head>
 <body>
 
@@ -29,23 +29,23 @@
 
     <div class="top_drinks_list">
         <div class="scale">
-            <img src="assets/cocktails/Chambord.jpg">
+            <img src="../../assets/cocktails/Chambord.jpg">
             <span>Chambord</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/Mojito.jpg">
+            <img src="../../assets/cocktails/Mojito.jpg">
             <span>Mojito</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/Random.jpg">
+            <img src="../../assets/cocktails/Random.jpg">
             <span>Random</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/WhiteNegroni.jpg">
+            <img src="../../assets/cocktails/WhiteNegroni.jpg">
             <span>White Negroni</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/WitchHeart.jpg">
+            <img src="../../assets/cocktails/WitchHeart.jpg">
             <span>Witch Heart</span>
         </div>
     </div>
@@ -54,28 +54,28 @@
 <div class="top_drinks">
     <div class="top_drinks_name">
         <span>Fancy Bars</span>
-        <img src="assets/bar.png">
+        <img src="../../assets/bar.png">
     </div>
 
     <div class="top_drinks_list">
         <div class="scale">
-            <img src="assets/cocktails/Chambord.jpg">
+            <img src="../../assets/cocktails/Chambord.jpg">
             <span>Chambord</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/Mojito.jpg">
+            <img src="../../assets/cocktails/Mojito.jpg">
             <span>Mojito</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/Random.jpg">
+            <img src="../../assets/cocktails/Random.jpg">
             <span>Random</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/WhiteNegroni.jpg">
+            <img src="../../assets/cocktails/WhiteNegroni.jpg">
             <span>White Negroni</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/WitchHeart.jpg">
+            <img src="../../assets/cocktails/WitchHeart.jpg">
             <span>Witch Heart</span>
         </div>
     </div>
