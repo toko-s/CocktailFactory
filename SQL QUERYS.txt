@@ -1,36 +1,34 @@
-CREATE TABLE Cocktail (
-id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE users (
+userID INT NOT NULL AUTO_INCREMENT,
+username varchar(50) NOT NULL,
+password varchar(50) NOT NULL,
+PRIMARY KEY(userID)
+);
+
+CREATE TABLE cocktails (
+cocktailID INT NOT NULL AUTO_INCREMENT,
+userID INT NOT NULL,
 name varchar(45) NOT NULL,
 rating DOUBLE,
 voters INT,
-PRIMARY KEY(id)
+PRIMARY KEY(cocktailID),
+FOREIGN KEY (userID) REFERENCES users(userID)
 );
 
-CREATE TABLE Ingredient (
-id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE ingredients (
+ingredientID INT NOT NULL AUTO_INCREMENT,
 name varchar(45) NOT NULL,
 price DOUBLE,
 weight DOUBLE,
-PRIMARY KEY(id)
+PRIMARY KEY(ingredientID)
 );
 
-CREATE TABLE cocktail_to_ingredient (
+CREATE TABLE cocktail_to_ingredients (
 id INT NOT NULL AUTO_INCREMENT,
-cocktailId INT NOT NULL,
-ingredientId INT NOT NULL,
-PRIMARY KEY(id)
+cocktailID INT NOT NULL,
+ingredientID INT NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY (cocktailID) REFERENCES cocktails(cocktailID),
+FOREIGN KEY (ingredientID) REFERENCES ingredients(ingredientID)
 );
 
-CREATE TABLE user (
-id INT NOT NULL AUTO_INCREMENT,
-username varchar(50) NOT NULL,
-password varchar(50) NOT NULL,
-PRIMARY KEY(id)
-);
-
-CREATE TABLE User_to_Cocktail (
-id INT NOT NULL AUTO_INCREMENT,
-userId INT NOT NULL,
-cocktailId INT NOT NULL,
-PRIMARY KEY(id)
-);
