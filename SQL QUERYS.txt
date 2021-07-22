@@ -1,0 +1,36 @@
+CREATE TABLE Cocktail (
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(45) NOT NULL,
+rating DOUBLE,
+voters INT,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE Ingredient (
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(45) NOT NULL,
+price DOUBLE,
+weight DOUBLE,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE cocktail_to_ingredient (
+id INT NOT NULL AUTO_INCREMENT,
+cocktailId INT NOT NULL,
+ingredientId INT NOT NULL,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE user (
+id INT NOT NULL AUTO_INCREMENT,
+username varchar(50) NOT NULL,
+password varchar(50) NOT NULL,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE User_to_Cocktail (
+id INT NOT NULL AUTO_INCREMENT,
+userId INT NOT NULL,
+cocktailId INT NOT NULL,
+PRIMARY KEY(id)
+);
