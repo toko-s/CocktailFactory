@@ -2,6 +2,8 @@ CREATE TABLE users (
 userID INT NOT NULL AUTO_INCREMENT,
 username varchar(50) NOT NULL,
 password varchar(50) NOT NULL,
+name varchar(50) NOT NULL,
+surname varchar(50) NOT NULL,
 PRIMARY KEY(userID)
 );
 
@@ -31,4 +33,13 @@ PRIMARY KEY(id),
 FOREIGN KEY (cocktailID) REFERENCES cocktails(cocktailID),
 FOREIGN KEY (ingredientID) REFERENCES ingredients(ingredientID)
 );
+
+CREATE TABLE users_fav_cocktails{
+id INT NOT NULL AUTO_INCREMENT,
+userID INT NOT NULL,
+cocktailID INT NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY (userID) REFERENCES users(userID)
+FOREIGN KEY (cocktailID) REFERENCES cocktails(cocktailID),
+}
 
