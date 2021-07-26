@@ -11,7 +11,8 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private List<Cocktail> cocktails;
+    private String name;
+    private String surname;
 
     public User(int id, String username, String password) {
         this.id = id;

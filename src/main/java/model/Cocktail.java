@@ -14,5 +14,4 @@ public class Cocktail {
     private String name;
     private double rating;
     private int voters;
-    private List<Ingredient> ingredients = new ArrayList<>();
 }
