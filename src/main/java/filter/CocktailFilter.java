@@ -113,10 +113,14 @@ public class CocktailFilter {
         }
 
         public CocktailFilterBuilder ratingType(String type) {
-            if (type.equals("LOWER"))
-                this.ratingType = Rating.LOWER;
-            else
-                this.ratingType = Rating.HIGHER;
+            try {
+                if (type.equals("LOWER"))
+                    this.ratingType = Rating.LOWER;
+                else
+                    this.ratingType = Rating.HIGHER;
+            } catch (Exception e) {
+                this.ratingType = null;
+            }
             return this;
         }
 
