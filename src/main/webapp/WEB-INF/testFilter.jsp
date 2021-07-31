@@ -13,13 +13,15 @@
 <body>
     <form method="post">
         <label for="name">Cocktail name:</label>
-        <input type="text" name="name"></br>
+        <input type="text" name="name"><br>
         <label for="rating">Rating:</label>
-        <input type="text" name="rating"></br>
-        <label for="type">LOWER</label>
-        <input type="radio" name="type" value="LOWER"></br>
-        <label for="type">HIGHER</label>
-        <input type="radio" name="type" value="HIGHER" checked></br>
+        <input type="text" name="rating"><br>
+        <label for="type">Type</label>
+        <select class="type">
+            <option value="">none</option>
+            <option value="HIGHER">higher</option>
+            <option value="LOWER">lower</option>
+        </select><br>
         <button type="submit">Search</button>
     </form>
 </body>
