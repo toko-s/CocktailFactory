@@ -15,9 +15,9 @@ public class CocktailDao {
 
     public CocktailDao() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(DatabaseConstants.NAME);
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/CocktailFactory", "root", "2412");
+                    DatabaseConstants.URL, DatabaseConstants.USER, DatabaseConstants.PASSWORD);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
