@@ -17,7 +17,7 @@ public class CocktailDao {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/CocktailFactory", "root", "2412");
+                    "jdbc:mysql://localhost:3306/oop_drinks?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "12345678");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -57,6 +57,33 @@ public class CocktailDao {
         return cocktails;
     }
 
+    public List<Cocktail> getUserFavouriteCocktails(int userID, int offset, int quantity){
+        List<Cocktail> cocktails = new ArrayList<>();
+        String userFavDrinks = "select cocktailID from users_fav_cocktails WHERE userID = ? limit ? offset ?" ;
+        try {
+            PreparedStatement statement = con.prepareStatement(userFavDrinks);
+            statement.setInt(1, userID);
+            statement.setInt(2, quantity);
+            statement.setInt(3, offset);
+            ResultSet result = statement.executeQuery();
+
+            String getCocktailByID = "select * from cocktails WHERE cocktailID = ?";
+            statement = con.prepareStatement(getCocktailByID);
+
+            while(result.next()){
+                int cocktailID = result.getInt("cocktailID");
+                statement.setInt(1, cocktailID);
+                ResultSet res = statement.executeQuery();
+                res.next();
+                cocktails.add(convertToCocktail(res));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return cocktails;
+    }
+
     private Cocktail convertToCocktail(ResultSet result) throws SQLException {
         Cocktail curr = new Cocktail();
         curr.setName(result.getString("name"));
@@ -70,7 +97,7 @@ public class CocktailDao {
 
     private List<Ingredient> getIngredients(int id) throws SQLException {
         List<Ingredient> ingredients = new ArrayList<>();
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktail_to_ingredient where cocktailId = ?");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktail_to_ingredients where cocktailId = ?");
 
         statement.setInt(1, id);
         ResultSet resultConnector = statement.executeQuery();
