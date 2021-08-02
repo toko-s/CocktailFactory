@@ -15,7 +15,7 @@ public class CocktailDao {
 
     public CocktailDao() {
         try {
-            Class.forName(DatabaseConstants.NAME);
+            Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(
                     DatabaseConstants.URL, DatabaseConstants.USER, DatabaseConstants.PASSWORD);
         } catch (SQLException | ClassNotFoundException e) {
@@ -97,7 +97,7 @@ public class CocktailDao {
 
     private List<Ingredient> getIngredients(int id) throws SQLException {
         List<Ingredient> ingredients = new ArrayList<>();
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktail_to_ingredient where cocktailId = ?");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktail_to_ingredients where cocktailId = ?");
 
         statement.setInt(1, id);
         ResultSet resultConnector = statement.executeQuery();
