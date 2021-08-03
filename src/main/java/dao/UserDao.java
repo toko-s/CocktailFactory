@@ -21,8 +21,11 @@ public class UserDao {
 
     private UserDao() {
         try {
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost/cocktailfactory?user=root&password=Gamersaninja1");
-        } catch (Exception ignored) {
+            Class.forName(DatabaseConstants.NAME);
+            connection = DriverManager.getConnection(
+                    DatabaseConstants.URL, DatabaseConstants.USER, DatabaseConstants.PASSWORD);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -30,10 +33,12 @@ public class UserDao {
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(
-                    "INSERT INTO user (username, password) VALUE (?, ?);",
+                    "INSERT INTO users (username, password, name, surname) VALUE (?, ?, ?, ?);",
                     Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, user.getUsername());
             stm.setString(2, user.getPassword());
+            stm.setString(3, user.getName());
+            stm.setString(4, user.getSurname());
             if (stm.executeUpdate() != 1) {
                 throw new Exception("Could not add user");
             }
@@ -59,7 +64,7 @@ public class UserDao {
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(
-                    "SELECT * FROM user WHERE username =?;");
+                    "SELECT * FROM users WHERE username =?;");
             stm.setString(1, username);
             ResultSet res = stm.executeQuery();
             res.next();

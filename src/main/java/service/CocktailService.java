@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CocktailService {
     public static List<Cocktail> getCocktails(CocktailFilter filter) throws SQLException {
-        CocktailDao dao = new CocktailDao();
+        CocktailDao dao = CocktailDao.getInstance();
         return dao.getCocktails(filter);
     }
 }

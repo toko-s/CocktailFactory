@@ -18,14 +18,14 @@ public class MainServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CocktailFilter filter = CocktailFilter.builder()
-                .name(req.getParameter("name"))
-                .rating(req.getParameter("rating"))
-                .ratingType(req.getParameter("type"))
-                .build();
-        List<Cocktail> cocktails= CocktailService.getCocktails(filter);
-        req.setAttribute("cocktails",cocktails);
-
+//        CocktailFilter filter = CocktailFilter.builder()
+//                .name(req.getParameter("name"))
+//                .rating(req.getParameter("rating"))
+//                .ratingType(req.getParameter("type"))
+//                .build();
+//        List<Cocktail> cocktails= CocktailService.getCocktails(filter);
+//        req.setAttribute("cocktails",cocktails);
+        req.getRequestDispatcher("index.jsp").forward(req,resp);
     }
 
 
