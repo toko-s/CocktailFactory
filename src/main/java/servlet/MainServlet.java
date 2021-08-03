@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/cocktails")
+@WebServlet("/main")
 public class MainServlet extends HttpServlet {
     @SneakyThrows
     @Override
@@ -25,12 +25,14 @@ public class MainServlet extends HttpServlet {
 //                .build();
 //        List<Cocktail> cocktails= CocktailService.getCocktails(filter);
 //        req.setAttribute("cocktails",cocktails);
-        req.getRequestDispatcher("index.jsp").forward(req,resp);
+        System.out.println(req.getServletContext().getAttribute("user"));
+        req.getRequestDispatcher("/index.jsp").forward(req,resp);
     }
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("WEB-INF/testFilter.jsp").forward(req,resp);
+        System.out.println(req.getServletContext().getAttribute("user"));
+        resp.sendRedirect("/index.jsp");
     }
 }

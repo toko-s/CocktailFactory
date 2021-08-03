@@ -1,5 +1,7 @@
 package manager;
 
+import model.User;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -8,13 +10,12 @@ import java.util.HashMap;
 
 @WebListener
 public class UserManager implements ServletContextListener {
-    private HashMap<String, String> data;
+    private User user;
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext sc = servletContextEvent.getServletContext();
-        data = new HashMap<>();
-        sc.setAttribute("data", data);
+        sc.setAttribute("user", user);
     }
 
     @Override

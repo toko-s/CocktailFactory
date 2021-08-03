@@ -68,19 +68,16 @@ public class UserDao {
             stm.setString(1, username);
             ResultSet res = stm.executeQuery();
             res.next();
-            User user = new User(res.getInt(1),res.getString(2),res.getString(3));
+            User user = new User(res.getInt(1),res.getString(2),res.getString(3), res.getString(4), res.getString(5));
             return user;
-        } catch (Exception throwables) {
-            throwables.printStackTrace();
+        } catch (Exception ignored) {
+            return null;
         } finally {
             if (stm != null) {
                 try {
                     stm.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+                } catch (SQLException ignored) {}
             }
         }
-        return null;
     }
 }
