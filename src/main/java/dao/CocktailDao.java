@@ -11,9 +11,21 @@ import java.util.List;
 
 public class CocktailDao {
 
+    private static CocktailDao instance;
+
     public Connection con;
 
-    public CocktailDao() {
+
+    public static CocktailDao getInstance() {
+        if (instance == null)
+            synchronized (UserDao.class) {
+                if (instance == null)
+                    instance = new CocktailDao();
+            }
+        return instance;
+    }
+
+    private CocktailDao() {
         try {
             Class.forName(DatabaseConstants.NAME);
             con = DriverManager.getConnection(
@@ -46,7 +58,7 @@ public class CocktailDao {
             }
             params.add(filter.getRating());
         }
-        PreparedStatement statement = con.prepareStatement("select * from cocktail WHERE 1 = 1 " + where);
+        PreparedStatement statement = con.prepareStatement("select * from cocktails WHERE 1 = 1 " + where);
         for(int i = 1 ; i < params.size() + 1; i++){
             statement.setString(i, String.valueOf(params.get(i -1)));
         }
@@ -54,6 +66,7 @@ public class CocktailDao {
         while (result.next()) {
             cocktails.add(convertToCocktail(result));
         }
+        System.out.println(cocktails);
         return cocktails;
     }
 

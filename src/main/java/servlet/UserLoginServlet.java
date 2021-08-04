@@ -24,19 +24,18 @@ public class UserLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        System.out.println(username + password);
 
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         UserResponse response = UserService.login(user);
 
-        switch (response.getType()) {
-            case SUCCESS:
-                req.getRequestDispatcher("index.jsp").forward(req,resp);
-            default:
-                req.setAttribute("head", response.getType());
-                req.getRequestDispatcher("Login.jsp").forward(req,resp);
+        if (response.getType() == UserResponse.ResponseType.SUCCESS) {
+            req.getServletContext().setAttribute("user", response.getUser());
+            req.getRequestDispatcher("/main").forward(req, resp);
+        } else {
+            req.setAttribute("head", response.getType());
+            req.getRequestDispatcher("Login.jsp").forward(req, resp);
         }
     }
 }

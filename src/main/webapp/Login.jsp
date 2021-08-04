@@ -16,7 +16,7 @@
 
     <h1>${head}</h1>
 
-    <form method = POST>
+    <form method = "POST">
         <label for="username">Username</label>
         <input type="text" name="username" /><br/>
         <label for="password">Password</label>

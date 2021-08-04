@@ -14,7 +14,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CocktailDao dao = new CocktailDao();
+        CocktailDao dao = CocktailDao.getInstance();
         System.out.println(dao.getUserFavouriteCocktails(1, 0, 1).get(0));
     }
 
