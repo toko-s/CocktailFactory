@@ -76,6 +76,7 @@ public class CocktailDao {
             PreparedStatement statement = con.prepareStatement(size);
             statement.setInt(1, userID);
             ResultSet countSet = statement.executeQuery();
+            countSet.next();
             int count = countSet.getInt(1);
 
             if(offset + quantity > count){
@@ -115,6 +116,7 @@ public class CocktailDao {
             PreparedStatement statement = con.prepareStatement(size);
             statement.setInt(1, userID);
             ResultSet countSet = statement.executeQuery();
+            countSet.next();
             int count = countSet.getInt(1);
 
             if(offset + quantity > count){

@@ -18,13 +18,12 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CocktailDao dao = new CocktailDao();
         Cocktail cocktail = new Cocktail();
-        cocktail.setUserID(3);
+        cocktail.setUserID(1);
         cocktail.setName("Mohito");
         cocktail.setRating(4.2);
         cocktail.setVoters(23);
-        dao.AddCocktail(cocktail);
 
-        List<Cocktail> cocktails = dao.getUsersCocktails(3, 0, 1);
+        List<Cocktail> cocktails = dao.getUsersCocktails(1, 0, 13);
         for(int i = 0; i < cocktails.size(); i++){
             System.out.println(cocktails.get(i));
         }
