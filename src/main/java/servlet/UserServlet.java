@@ -24,6 +24,8 @@ public class UserServlet extends HttpServlet {
             System.out.println(cocktails.get(i));
         }
 
+
+
     }
 
     @Override
