@@ -70,6 +70,15 @@ public class CocktailDao {
             }
             params.add(filter.getRating());
         }
+        if (filter.getOrder() != null) {
+            where.append(" ORDER BY rating ");
+            switch (filter.getOrder()) {
+                case ASCENDING:
+                    where.append("ASC"); break;
+                case DESCENDING:
+                    where.append("DESC"); break;
+            }
+        }
         PreparedStatement statement = con.prepareStatement("select * from cocktails WHERE 1 = 1 " + where);
         for(int i = 1 ; i < params.size() + 1; i++){
             statement.setString(i, String.valueOf(params.get(i -1)));

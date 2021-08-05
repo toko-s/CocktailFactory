@@ -13,7 +13,6 @@
 </head>
 <body>
     <a href="/register">Register </a>
-
     <h1>${head}</h1>
 
     <form method = "POST">
