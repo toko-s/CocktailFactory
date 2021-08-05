@@ -23,8 +23,19 @@ public class CocktailDao {
         }
     }
 
-    public void AddCocktail(Cocktail cockTail) {
-
+    public void AddCocktail(Cocktail cocktail) {
+        String query = " insert into cocktails (userID, name, rating, voters)"
+                + " values (?, ?, ?, ?)";
+        try {
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, cocktail.getUserID());
+            statement.setString(2, cocktail.getName());
+            statement.setDouble(3, cocktail.getRating());
+            statement.setDouble(4, cocktail.getVoters());
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public List<Cocktail> getCocktails(CocktailFilter filter) throws SQLException {
@@ -57,11 +68,23 @@ public class CocktailDao {
         return cocktails;
     }
 
-    public List<Cocktail> getUserFavouriteCocktails(int userID, int offset, int quantity){
+
+    public List<Cocktail> getUsersFavouriteCocktails(int userID, int offset, int quantity){
         List<Cocktail> cocktails = new ArrayList<>();
-        String userFavDrinks = "select cocktailID from users_fav_cocktails WHERE userID = ? limit ? offset ?" ;
         try {
-            PreparedStatement statement = con.prepareStatement(userFavDrinks);
+            String size = "select count(*) from users_fav_cocktails WHERE userID = ?";
+            PreparedStatement statement = con.prepareStatement(size);
+            statement.setInt(1, userID);
+            ResultSet countSet = statement.executeQuery();
+            int count = countSet.getInt(1);
+
+            if(offset + quantity > count){
+                quantity = count - offset;
+            }
+
+            String userFavDrinks = "select cocktailID from users_fav_cocktails WHERE userID = ? limit ? offset ?" ;
+
+            statement = con.prepareStatement(userFavDrinks);
             statement.setInt(1, userID);
             statement.setInt(2, quantity);
             statement.setInt(3, offset);
@@ -77,6 +100,38 @@ public class CocktailDao {
                 res.next();
                 cocktails.add(convertToCocktail(res));
             }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return cocktails;
+    }
+
+    public List<Cocktail> getUsersCocktails(int userID, int offset, int quantity){
+        List<Cocktail> cocktails = new ArrayList<>();
+        try {
+            String size = "select count(*) from cocktails WHERE userID = ?";
+            PreparedStatement statement = con.prepareStatement(size);
+            statement.setInt(1, userID);
+            ResultSet countSet = statement.executeQuery();
+            int count = countSet.getInt(1);
+
+            if(offset + quantity > count){
+                quantity = count - offset;
+            }
+
+            String userDrinks = "select * from cocktails WHERE userID = ? limit ? offset ?";
+            statement = con.prepareStatement(userDrinks);
+            statement.setInt(1, userID);
+            statement.setInt(2, quantity);
+            statement.setInt(3, offset);
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                cocktails.add(convertToCocktail(result));
+            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -86,6 +141,7 @@ public class CocktailDao {
 
     private Cocktail convertToCocktail(ResultSet result) throws SQLException {
         Cocktail curr = new Cocktail();
+        curr.setUserID(result.getInt("userID"));
         curr.setName(result.getString("name"));
         curr.setRating(result.getDouble("rating"));
         curr.setVoters(result.getInt("voters"));
