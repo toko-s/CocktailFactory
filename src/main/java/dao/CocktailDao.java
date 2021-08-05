@@ -12,6 +12,7 @@ import java.util.List;
 public class CocktailDao {
 
     private static CocktailDao instance;
+    private static final int TOP_DRINKS_NUM = 5;
 
     public Connection con;
 
@@ -35,7 +36,7 @@ public class CocktailDao {
         }
     }
 
-    public void AddCocktail(Cocktail cocktail) {
+    public void addCocktail(Cocktail cocktail) {
         String query = " insert into cocktails (userID, name, rating, voters)"
                 + " values (?, ?, ?, ?)";
         try {
@@ -85,20 +86,9 @@ public class CocktailDao {
     public List<Cocktail> getUsersFavouriteCocktails(int userID, int offset, int quantity){
         List<Cocktail> cocktails = new ArrayList<>();
         try {
-            String size = "select count(*) from users_fav_cocktails WHERE userID = ?";
-            PreparedStatement statement = con.prepareStatement(size);
-            statement.setInt(1, userID);
-            ResultSet countSet = statement.executeQuery();
-            countSet.next();
-            int count = countSet.getInt(1);
-
-            if(offset + quantity > count){
-                quantity = count - offset;
-            }
-
             String userFavDrinks = "select cocktailID from users_fav_cocktails WHERE userID = ? limit ? offset ?" ;
 
-            statement = con.prepareStatement(userFavDrinks);
+            PreparedStatement statement = con.prepareStatement(userFavDrinks);
             statement.setInt(1, userID);
             statement.setInt(2, quantity);
             statement.setInt(3, offset);
@@ -125,22 +115,31 @@ public class CocktailDao {
     public List<Cocktail> getUsersCocktails(int userID, int offset, int quantity){
         List<Cocktail> cocktails = new ArrayList<>();
         try {
-            String size = "select count(*) from cocktails WHERE userID = ?";
-            PreparedStatement statement = con.prepareStatement(size);
-            statement.setInt(1, userID);
-            ResultSet countSet = statement.executeQuery();
-            countSet.next();
-            int count = countSet.getInt(1);
-
-            if(offset + quantity > count){
-                quantity = count - offset;
-            }
-
             String userDrinks = "select * from cocktails WHERE userID = ? limit ? offset ?";
-            statement = con.prepareStatement(userDrinks);
+            PreparedStatement statement = con.prepareStatement(userDrinks);
             statement.setInt(1, userID);
             statement.setInt(2, quantity);
             statement.setInt(3, offset);
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                cocktails.add(convertToCocktail(result));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return cocktails;
+    }
+
+    public List<Cocktail> getTopDrinks(){
+        List<Cocktail> cocktails = new ArrayList<>();
+
+        try {
+            String topDrinks = "select * from cocktails order by rating desc limit ?";
+            PreparedStatement statement = con.prepareStatement(topDrinks);
+            statement.setInt(1, TOP_DRINKS_NUM);
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
