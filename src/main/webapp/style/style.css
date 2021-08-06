@@ -227,3 +227,9 @@ span{
     font-family: Italiana, sans-serif;
     font-size: 25px;
 }
+
+#menu:hover {
+    background-image: url(/assets/more.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
