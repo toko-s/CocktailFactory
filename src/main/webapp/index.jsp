@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
     <script src="scripts/login.js" defer></script>
+    <script src="scripts/cocktails.js" defer></script>
 </head>
 <body>
 
@@ -84,7 +85,7 @@
     </div>
 </div>
 
-<div class="menu">
+<div id="menu" class="menu">
     <i class="fas fa-bars"></i> <span>Menu</span>
 </div>
 </body>
