@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @ToString
 public class Cocktail {
+    private int id;
     private int userID;
     private String name;
     private double rating;

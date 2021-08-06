@@ -1,12 +1,16 @@
+
 <html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
+    <script src="scripts/login.js" defer></script>
+    <script src="scripts/cocktails.js" defer></script>
     <script src="scripts/mainPage.js" defer></script>
 </head>
 <body>
+
 <div class="header">
     <span class="name">Cocktail Factory</span>
     <div class="login_signup ${applicationScope.get("user") != null ? "hidden" : ""}">
@@ -94,7 +98,7 @@
     </div>
 </div>
 
-<div class="menu">
+<div id="menu" class="menu">
     <i class="fas fa-bars"></i> <span>Menu</span>
 </div>
 </body>

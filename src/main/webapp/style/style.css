@@ -271,3 +271,9 @@ span{
 #log-out {
     transform: rotateY(180deg);
 }
+
+#menu:hover {
+    background-image: url(/assets/more.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
