@@ -1,36 +1,35 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 26.07.2021
-  Time: 21:50
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Cocktail" %>
 <html>
-<head>
-    <title>User</title>
-    <link rel="stylesheet" href="style/user.css">
-</head>
-<body>
-    <div>Welcome ${user.getName()} ${user.getSurname()}</div>
-    <div>Username: ${user.getUsername()}</div>
-    <a>Change Password</a>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<% List<Cocktail> cocktails = (List)session.getAttribute("cocktails");%>
 
-    <div class="splide">
+<head>
+    <link rel="stylesheet" href="./style/user.css">
+</head>
+
+<body>
+<div>Welcome ${user.getName()} ${user.getSurname()}</div>
+<div>Username: ${user.getUsername()}</div>
+<a>Change Password</a>
+
+<div class="splide">
     <div class="splide__track">
         <ul class="splide__list">
-            <li class="splide__slide">Slide 01</li>
-            <li class="splide__slide">Slide 02</li>
-            <li class="splide__slide">Slide 03</li>
-            <li class="splide__slide">Slide 04</li>
-            <li class="splide__slide">Slide 05</li>
+            <c:forEach items="${cocktails}" var="cocktail">
+                <li class="splide__slide">
+
+                </li>
+            </c:forEach>
         </ul>
     </div>
-    </div>
+</div>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
-    <script src="scripts/user.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+<script src="scripts/user.js"></script>
 
 </body>
+
 </html>

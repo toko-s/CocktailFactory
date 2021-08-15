@@ -139,14 +139,12 @@ public class CocktailDao {
         return cocktails;
     }
 
-    public List<Cocktail> getUsersCocktails(int userID, int offset, int quantity){
+    public List<Cocktail> getUsersCocktails(int userID){
         List<Cocktail> cocktails = new ArrayList<>();
         try {
-            String userDrinks = "select * from cocktails WHERE userID = ? limit ? offset ?";
+            String userDrinks = "select * from cocktails WHERE userID = ?";
             PreparedStatement statement = con.prepareStatement(userDrinks);
             statement.setInt(1, userID);
-            statement.setInt(2, quantity);
-            statement.setInt(3, offset);
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
