@@ -27,18 +27,8 @@ public class CocktailsServlet extends HttpServlet {
         CocktailFilter filter = new CocktailFilter();
 
 
-        //List<Cocktail> cocktails = dao.getCocktails(filter);
+        List<Cocktail> cocktails = dao.getCocktails(filter);
 
-        List<Cocktail> cocktails = new ArrayList<>();
-        Cocktail curr1 = new Cocktail();
-        curr1.setName("Mohito");
-        Cocktail curr2 = new Cocktail();
-        curr2.setName("Black Robin");
-        curr1.setId(2);
-        curr2.setId(3);
-        curr1.setRating(2.3);
-        cocktails.add(curr1);
-        cocktails.add(curr2);
         req.setAttribute("list",cocktails);
         req.getRequestDispatcher("/Cocktails.jsp").forward(req,resp);
     }

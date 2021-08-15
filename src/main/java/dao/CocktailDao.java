@@ -68,28 +68,37 @@ public class CocktailDao {
         List<Cocktail> cocktails = new ArrayList<>();
         StringBuilder where = new StringBuilder();
         List<Object> params = new ArrayList<>();
-        if (filter.getName() != null) {
-            where.append(" AND name LIKE ?");
-            params.add("%" + filter.getName() + "%");
-        }
-        if (filter.getRating() != null) {
-            if (filter.getRatingType() != null) {
-                switch (filter.getRatingType()){
-                    case LOWER: where.append(" AND rating <= ?"); break;
-                    case HIGHER: where.append(" AND rating >= ?"); break;
-                }
-            } else {
-                where.append(" AND rating = ?");
+        if (filter != null) {
+
+            if (filter.getName() != null) {
+                where.append(" AND name LIKE ?");
+                params.add("%" + filter.getName() + "%");
             }
-            params.add(filter.getRating());
-        }
-        if (filter.getOrder() != null) {
-            where.append(" ORDER BY rating ");
-            switch (filter.getOrder()) {
-                case ASCENDING:
-                    where.append("ASC"); break;
-                case DESCENDING:
-                    where.append("DESC"); break;
+            if (filter.getRating() != null) {
+                if (filter.getRatingType() != null) {
+                    switch (filter.getRatingType()) {
+                        case LOWER:
+                            where.append(" AND rating <= ?");
+                            break;
+                        case HIGHER:
+                            where.append(" AND rating >= ?");
+                            break;
+                    }
+                } else {
+                    where.append(" AND rating = ?");
+                }
+                params.add(filter.getRating());
+            }
+            if (filter.getOrder() != null) {
+                where.append(" ORDER BY rating ");
+                switch (filter.getOrder()) {
+                    case ASCENDING:
+                        where.append("ASC");
+                        break;
+                    case DESCENDING:
+                        where.append("DESC");
+                        break;
+                }
             }
         }
         PreparedStatement statement = con.prepareStatement("select * from cocktails WHERE 1 = 1 " + where);
@@ -100,7 +109,6 @@ public class CocktailDao {
         while (result.next()) {
             cocktails.add(convertToCocktail(result));
         }
-        System.out.println(cocktails);
         return cocktails;
     }
 
@@ -197,7 +205,6 @@ public class CocktailDao {
         ResultSet resultConnector = statement.executeQuery();
 
         while (resultConnector.next()) {
-            System.out.println(resultConnector);
             ingredients.add(collectIngredient(resultConnector));
         }
 
@@ -207,7 +214,7 @@ public class CocktailDao {
     private Ingredient collectIngredient(ResultSet resultConnector) throws SQLException {
         Ingredient ingredient = new Ingredient();
 
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM ingredient where id = ?");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM ingredients where id = ?");
         int id = resultConnector.getInt("ingredientId");
         statement.setInt(1, id);
 
@@ -216,10 +223,6 @@ public class CocktailDao {
         resultIngredient.next();
 
         ingredient.setName(resultIngredient.getString("name"));
-        ingredient.setWeight(resultIngredient.getDouble("weight"));
-        ingredient.setPrice(resultIngredient.getDouble("price"));
-
-        ingredient.toString();
 
         return ingredient;
     }
