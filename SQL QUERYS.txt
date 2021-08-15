@@ -20,8 +20,6 @@ FOREIGN KEY (userID) REFERENCES users(userID)
 CREATE TABLE ingredients (
 ingredientID INT NOT NULL AUTO_INCREMENT,
 name varchar(45) NOT NULL,
-price DOUBLE,
-weight DOUBLE,
 PRIMARY KEY(ingredientID)
 );
 
@@ -29,6 +27,7 @@ CREATE TABLE cocktail_to_ingredients (
 id INT NOT NULL AUTO_INCREMENT,
 cocktailID INT NOT NULL,
 ingredientID INT NOT NULL,
+ingredientAmount varchar(45),
 PRIMARY KEY(id),
 FOREIGN KEY (cocktailID) REFERENCES cocktails(cocktailID),
 FOREIGN KEY (ingredientID) REFERENCES ingredients(ingredientID)
