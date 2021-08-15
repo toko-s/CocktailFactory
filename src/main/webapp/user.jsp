@@ -5,12 +5,14 @@
   Time: 21:50
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>User</title>
 </head>
 <body>
-        ${requestScope.get("list")}
+    <div>Welcome ${user.getName()} ${user.getSurname()}</div>
+    <div>Username: ${user.getUsername()}</div>
+    <a>Change Password</a>
 </body>
 </html>
