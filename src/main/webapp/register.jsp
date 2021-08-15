@@ -11,7 +11,7 @@
 
 <html>
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="style/register.css"/>
     <script src="scripts/register.js" defer></script>
 </head>

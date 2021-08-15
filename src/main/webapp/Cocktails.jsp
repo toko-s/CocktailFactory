@@ -26,6 +26,7 @@
                <span class="voters" >(${cocktail.voters})</span>
                <form method="get" action="/cocktailpage">
                    <button>
+                       details
                        <input type="hidden" name="id" value=${cocktail.id} />
                    </button>
                </form>
