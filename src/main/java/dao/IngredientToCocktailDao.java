@@ -45,4 +45,15 @@ public class IngredientToCocktailDao {
 
         return ingredients;
     }
+
+    public void addIngredientToConnector(int ingredientID, int cocktailID, String ingredientQuantity) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO cocktail_to_ingredients " +
+                "(cocktailID, ingredientID, ingredientAmount)" +
+                "values (?,?,?)");
+        statement.setInt(1,cocktailID);
+        statement.setInt(2,ingredientID);
+        statement.setString(3,ingredientQuantity);
+        statement.executeUpdate();
+    }
+
 }
