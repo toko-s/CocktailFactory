@@ -1,0 +1,7 @@
+.splide__slide {
+    height: 20rem;
+    background: magenta;
+    display: grid;
+    place-items: center;
+    border: 1px solid black ;
+}

@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.CocktailDao;
 import filter.CocktailFilter;
 import lombok.SneakyThrows;
 import model.Cocktail;
@@ -15,15 +16,17 @@ import java.util.List;
 
 @WebServlet("/main")
 public class MainServlet extends HttpServlet {
-    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/index.jsp").forward(req,resp);
+
     }
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/index.jsp");
+        CocktailDao dao = CocktailDao.getInstance();
+        List<Cocktail> cocktails = dao.getTopDrinks();
+        req.setAttribute("cocktails", cocktails);
+        req.getRequestDispatcher("/main.jsp").forward(req,resp);
     }
 }
