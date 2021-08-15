@@ -51,6 +51,19 @@ public class CocktailDao {
         }
     }
 
+    public Cocktail getCocktailById(int cocktailId) throws SQLException {
+        Cocktail cocktail;
+
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktails where id = ?");
+        statement.setInt(1,cocktailId);
+
+        ResultSet result = statement.executeQuery();
+
+        result.next();
+        cocktail = convertToCocktail(result);
+        return cocktail;
+    }
+
     public List<Cocktail> getCocktails(CocktailFilter filter) throws SQLException {
         List<Cocktail> cocktails = new ArrayList<>();
         StringBuilder where = new StringBuilder();
@@ -69,6 +82,15 @@ public class CocktailDao {
                 where.append(" AND rating = ?");
             }
             params.add(filter.getRating());
+        }
+        if (filter.getOrder() != null) {
+            where.append(" ORDER BY rating ");
+            switch (filter.getOrder()) {
+                case ASCENDING:
+                    where.append("ASC"); break;
+                case DESCENDING:
+                    where.append("DESC"); break;
+            }
         }
         PreparedStatement statement = con.prepareStatement("select * from cocktails WHERE 1 = 1 " + where);
         for(int i = 1 ; i < params.size() + 1; i++){
@@ -159,11 +181,13 @@ public class CocktailDao {
         curr.setName(result.getString("name"));
         curr.setRating(result.getDouble("rating"));
         curr.setVoters(result.getInt("voters"));
-
+        curr.setId(result.getInt("id"));
         int id = result.getInt(1);
         curr.setIngredients(getIngredients(id));
         return curr;
     }
+
+
 
     private List<Ingredient> getIngredients(int id) throws SQLException {
         List<Ingredient> ingredients = new ArrayList<>();
@@ -199,5 +223,7 @@ public class CocktailDao {
 
         return ingredient;
     }
+
+
 }
 

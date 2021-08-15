@@ -3,15 +3,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
     <script src="scripts/login.js" defer></script>
+    <script src="scripts/cocktails.js" defer></script>
+    <script src="scripts/mainPage.js" defer></script>
 </head>
 <body>
 
 <div class="header">
     <span class="name">Cocktail Factory</span>
-    <div class="login_signup">
+    <div class="login_signup ${applicationScope.get("user") != null ? "hidden" : ""}">
         <div class="popup">
             <i id="sign-in" class="fas fa-sign-in-alt"></i>
             <span class="popuptext" id="myPopupSignIn">Sign In</span>
@@ -20,6 +22,17 @@
         <div class="popup">
             <i id="sign-up" class="fas fa-user-plus"></i>
             <span class="popuptext" id="myPopupSignUp">Sign Up</span>
+        </div>
+    </div>
+    <div class="user-signout ${applicationScope.get("user") == null ? "hidden" : ""}">
+        <div class="popup">
+            <i id="log-out" class="fas fa-sign-out-alt"></i>
+            <span class="popuptext" id="myPopupLogOut">Log Out</span>
+        </div>
+
+        <div class="popup">
+            <i id="my-page" class="fas fa-user"></i>
+            <span class="popuptext" id="myPopupMyPage">My Account</span>
         </div>
     </div>
 </div>
@@ -84,7 +97,7 @@
     </div>
 </div>
 
-<div class="menu">
+<div id="menu" class="menu">
     <i class="fas fa-bars"></i> <span>Menu</span>
 </div>
 </body>
