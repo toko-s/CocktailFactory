@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.CocktailDao;
 import filter.CocktailFilter;
 import lombok.SneakyThrows;
 import model.Cocktail;
@@ -15,7 +16,6 @@ import java.util.List;
 
 @WebServlet("/main")
 public class MainServlet extends HttpServlet {
-    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        CocktailFilter filter = CocktailFilter.builder()
@@ -25,14 +25,19 @@ public class MainServlet extends HttpServlet {
 //                .build();
 //        List<Cocktail> cocktails= CocktailService.getCocktails(filter);
 //        req.setAttribute("cocktails",cocktails);
-        System.out.println(req.getServletContext().getAttribute("user"));
-        req.getRequestDispatcher("/index.jsp").forward(req,resp);
+
+        CocktailDao dao = CocktailDao.getInstance();
+        List<Cocktail> cocktails = dao.getTopDrinks();
+        req.setAttribute("cocktails", cocktails);
+        req.getRequestDispatcher("/main.jsp").forward(req,resp);
     }
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getServletContext().getAttribute("user"));
-        resp.sendRedirect("/index.jsp");
+        CocktailDao dao = CocktailDao.getInstance();
+        List<Cocktail> cocktails = dao.getTopDrinks();
+        req.setAttribute("cocktails", cocktails);
+        req.getRequestDispatcher("/main.jsp").forward(req,resp);
     }
 }
