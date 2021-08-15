@@ -34,26 +34,30 @@ public class CocktailDao {
         }
     }
 
-    public void addCocktail(Cocktail cocktail) {
+    public int addCocktail(Cocktail cocktail) throws SQLException {
         String query = " insert into cocktails (userID, name, rating, voters)"
                 + " values (?, ?, ?, ?)";
         try {
-            PreparedStatement statement = con.prepareStatement(query);
+            PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, cocktail.getUserID());
             statement.setString(2, cocktail.getName());
             statement.setDouble(3, cocktail.getRating());
             statement.setDouble(4, cocktail.getVoters());
-            statement.execute();
+            statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            rs.next();
+            return rs.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return -1;
     }
 
     public Cocktail getCocktailById(int cocktailId) throws SQLException {
         Cocktail cocktail;
 
         PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktails where cocktailID = ?");
-        statement.setInt(1,cocktailId);
+        statement.setInt(1, cocktailId);
 
         ResultSet result = statement.executeQuery();
 
@@ -100,8 +104,8 @@ public class CocktailDao {
             }
         }
         PreparedStatement statement = con.prepareStatement("select * from cocktails WHERE 1 = 1 " + where);
-        for(int i = 1 ; i < params.size() + 1; i++){
-            statement.setString(i, String.valueOf(params.get(i -1)));
+        for (int i = 1; i < params.size() + 1; i++) {
+            statement.setString(i, String.valueOf(params.get(i - 1)));
         }
         ResultSet result = statement.executeQuery();
         while (result.next()) {
@@ -123,7 +127,7 @@ public class CocktailDao {
             String getCocktailByID = "select * from cocktails WHERE cocktailID = ?";
             statement = con.prepareStatement(getCocktailByID);
 
-            while(result.next()){
+            while (result.next()) {
                 int cocktailID = result.getInt("cocktailID");
                 statement.setInt(1, cocktailID);
                 ResultSet res = statement.executeQuery();
@@ -146,7 +150,7 @@ public class CocktailDao {
             statement.setInt(1, userID);
             ResultSet result = statement.executeQuery();
 
-            while(result.next()){
+            while (result.next()) {
                 cocktails.add(convertToCocktail(result));
             }
 
@@ -172,7 +176,7 @@ public class CocktailDao {
         }
     }
 
-    public List<Cocktail> getTopDrinks(){
+    public List<Cocktail> getTopDrinks() {
         List<Cocktail> cocktails = new ArrayList<>();
 
         try {
@@ -181,7 +185,7 @@ public class CocktailDao {
             statement.setInt(1, TOP_DRINKS_NUM);
             ResultSet result = statement.executeQuery();
 
-            while(result.next()){
+            while (result.next()) {
                 cocktails.add(convertToCocktail(result));
             }
 
