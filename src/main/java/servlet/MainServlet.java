@@ -18,18 +18,7 @@ import java.util.List;
 public class MainServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        CocktailFilter filter = CocktailFilter.builder()
-//                .name(req.getParameter("name"))
-//                .rating(req.getParameter("rating"))
-//                .ratingType(req.getParameter("type"))
-//                .build();
-//        List<Cocktail> cocktails= CocktailService.getCocktails(filter);
-//        req.setAttribute("cocktails",cocktails);
 
-        CocktailDao dao = CocktailDao.getInstance();
-        List<Cocktail> cocktails = dao.getTopDrinks();
-        req.setAttribute("cocktails", cocktails);
-        req.getRequestDispatcher("/main.jsp").forward(req,resp);
     }
 
 

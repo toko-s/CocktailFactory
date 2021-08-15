@@ -1,6 +1,9 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Cocktail" %>
 <html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<% List<Cocktail> cocktails = (List)session.getAttribute("cocktails");%>
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
@@ -37,33 +40,21 @@
     </div>
 </div>
 
+
 <div class="top_drinks">
     <div class="top_drinks_name">
         <span>Top Drinks</span>
         <i class="fas fa-cocktail"></i>
     </div>
 
+
     <div class="top_drinks_list">
-        <div class="scale">
-            <img src="assets/cocktails/Chambord.jpg">
-            <span>Chambord</span>
-        </div>
-        <div class="scale">
-            <img src="assets/cocktails/Mojito.jpg">
-            <span>Mojito</span>
-        </div>
-        <div class="scale">
-            <img src="assets/cocktails/Random.jpg">
-            <span>Random</span>
-        </div>
-        <div class="scale">
-            <img src="assets/cocktails/WhiteNegroni.jpg">
-            <span>White Negroni</span>
-        </div>
-        <div class="scale">
-            <img src="assets/cocktails/WitchHeart.jpg">
-            <span>Witch Heart</span>
-        </div>
+        <c:forEach items="${cocktails}" var="cocktail">
+            <div class="scale">
+                <img src="assets/cocktails/Chambord.jpg">
+                <span>${cocktail.getName()}</span>
+            </div>
+        </c:forEach>
     </div>
 </div>
 
