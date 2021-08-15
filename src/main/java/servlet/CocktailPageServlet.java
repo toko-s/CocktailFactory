@@ -2,6 +2,7 @@ package servlet;
 
 import dao.CocktailDao;
 import filter.CocktailFilter;
+import lombok.SneakyThrows;
 import model.Cocktail;
 
 import javax.servlet.ServletException;
@@ -17,8 +18,9 @@ import java.util.List;
 @WebServlet("/cocktailpage")
 public class CocktailPageServlet extends HttpServlet {
 
+    @SneakyThrows
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ServletException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException, ServletException {
         String currcocktailId = req.getParameter("id");
 
         CocktailDao dao = CocktailDao.getInstance();
@@ -31,8 +33,4 @@ public class CocktailPageServlet extends HttpServlet {
         req.setAttribute("cocktail",cocktail);
         req.getRequestDispatcher("/CocktailPage.jsp").forward(req,resp);
     }
-
-
-
-
 }
