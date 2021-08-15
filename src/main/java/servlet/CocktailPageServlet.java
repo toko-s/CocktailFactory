@@ -20,7 +20,7 @@ public class CocktailPageServlet extends HttpServlet {
 
     @SneakyThrows
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException, ServletException {
+protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException, ServletException {
         String currcocktailId = req.getParameter("id");
 
         CocktailDao dao = CocktailDao.getInstance();

@@ -32,7 +32,7 @@ public class UserLoginServlet extends HttpServlet {
 
         if (response.getType() == UserResponse.ResponseType.SUCCESS) {
             req.getServletContext().setAttribute("user", response.getUser());
-            req.getRequestDispatcher("/main").forward(req, resp);
+            resp.sendRedirect("/main");
         } else {
             req.setAttribute("head", response.getType());
             req.getRequestDispatcher("Login.jsp").forward(req, resp);
