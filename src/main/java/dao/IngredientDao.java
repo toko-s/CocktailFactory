@@ -3,6 +3,8 @@ package dao;
 import model.Ingredient;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IngredientDao {
     private static IngredientDao instance;
@@ -42,5 +44,15 @@ public class IngredientDao {
         ingredient.setName(resultIngredient.getString("name"));
 
         return ingredient;
+    }
+
+    public List<Ingredient> getAllIngredients() throws SQLException {
+        List<Ingredient> result = new ArrayList<>();
+        PreparedStatement st = connection.prepareStatement("SELECT * FROM ingredients");
+        ResultSet rs = st.executeQuery();
+        while(rs.next()){
+            result.add(new Ingredient(rs.getString("name")));
+        }
+        return result;
     }
 }

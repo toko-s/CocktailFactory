@@ -16,10 +16,10 @@
 </head>
 <body>
 
-<form method="POST" action="/addCoctail">
+<form method="POST" action="/addCocktail">
     <div>
         <label for="CocktailName">Cocktail Name <span> * </span></label>
-        <input type="text" name="CocktailName"/>
+        <input type="text" name="CocktailName" required/>
     </div>
     <div>
         <label for="UploadImage">Upload Image </label>
