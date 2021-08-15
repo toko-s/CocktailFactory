@@ -1,8 +1,8 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import model.Ingredient;
+
+import java.sql.*;
 
 public class IngredientDao {
     private static IngredientDao instance;
@@ -26,5 +26,21 @@ public class IngredientDao {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public Ingredient getById(int id) throws SQLException {
+        Ingredient ingredient = new Ingredient();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM ingredients where ingredientID = ?");
+
+        statement.setInt(1, id);
+
+        ResultSet resultIngredient = statement.executeQuery();
+
+        resultIngredient.next();
+
+        ingredient.setName(resultIngredient.getString("name"));
+
+        return ingredient;
     }
 }

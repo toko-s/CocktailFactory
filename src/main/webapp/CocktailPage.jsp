@@ -12,6 +12,7 @@
     <title>Cocktail</title>
 </head>
 <body>
+    <a href="/cocktails">Back to cocktails!</a>
     <li>${cocktail.name}
             ${cocktail.rating}
         <span class="fa fa-star ${cocktail.rating > 0 ? "checked" : ""}"></span>

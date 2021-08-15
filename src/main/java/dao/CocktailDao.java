@@ -2,20 +2,17 @@ package dao;
 
 import filter.CocktailFilter;
 import model.Cocktail;
-import model.Ingredient;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CocktailDao {
 
-    private static CocktailDao instance;
     private static final int TOP_DRINKS_NUM = 5;
 
+    private static CocktailDao instance;
     public Connection con;
-
 
     public static CocktailDao getInstance() {
         if (instance == null)
@@ -54,7 +51,7 @@ public class CocktailDao {
     public Cocktail getCocktailById(int cocktailId) throws SQLException {
         Cocktail cocktail;
 
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktails where id = ?");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktails where cocktailID = ?");
         statement.setInt(1,cocktailId);
 
         ResultSet result = statement.executeQuery();
@@ -184,49 +181,15 @@ public class CocktailDao {
     }
 
     private Cocktail convertToCocktail(ResultSet result) throws SQLException {
+        IngredientToCocktailDao dao = IngredientToCocktailDao.getInstance();
         Cocktail curr = new Cocktail();
         curr.setUserID(result.getInt("userID"));
         curr.setName(result.getString("name"));
         curr.setRating(result.getDouble("rating"));
         curr.setVoters(result.getInt("voters"));
-        curr.setId(result.getInt("id"));
-        int id = result.getInt(1);
-        curr.setIngredients(getIngredients(id));
+        curr.setId(result.getInt("cocktailID"));
+        curr.setIngredients(dao.getIngredientsByCocktailId(result.getInt(1)));
         return curr;
     }
-
-
-
-    private List<Ingredient> getIngredients(int id) throws SQLException {
-        List<Ingredient> ingredients = new ArrayList<>();
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM cocktail_to_ingredients where cocktailId = ?");
-
-        statement.setInt(1, id);
-        ResultSet resultConnector = statement.executeQuery();
-
-        while (resultConnector.next()) {
-            ingredients.add(collectIngredient(resultConnector));
-        }
-
-        return ingredients;
-    }
-
-    private Ingredient collectIngredient(ResultSet resultConnector) throws SQLException {
-        Ingredient ingredient = new Ingredient();
-
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM ingredients where id = ?");
-        int id = resultConnector.getInt("ingredientId");
-        statement.setInt(1, id);
-
-        ResultSet resultIngredient = statement.executeQuery();
-
-        resultIngredient.next();
-
-        ingredient.setName(resultIngredient.getString("name"));
-
-        return ingredient;
-    }
-
-
 }
 

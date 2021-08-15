@@ -1,8 +1,10 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import model.Ingredient;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IngredientToCocktailDao {
     private static IngredientToCocktailDao instance;
@@ -26,5 +28,21 @@ public class IngredientToCocktailDao {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Ingredient> getIngredientsByCocktailId(int id) throws SQLException {
+        IngredientDao dao = IngredientDao.getInstance();
+
+        List<Ingredient> ingredients = new ArrayList<>();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM cocktail_to_ingredients where cocktailId = ?");
+
+        statement.setInt(1, id);
+        ResultSet resultConnector = statement.executeQuery();
+
+        while (resultConnector.next()) {
+            ingredients.add(dao.getById(resultConnector.getInt("ingredientID")));
+        }
+
+        return ingredients;
     }
 }
