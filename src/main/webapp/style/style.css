@@ -45,6 +45,38 @@ span{
     padding: 20px;
 }
 
+.user-signout div{
+    margin: 20px 0;
+}
+
+.user-signout div i{
+    color: #f8f9af;
+}
+
+.user-signout div:first-child {
+    border-right: 2px solid #f8f9af;
+    padding: 0px 22px;
+}
+
+.user-signout div:last-child{
+    padding: 4px 20px;
+}
+
+.user-signout div:first-child i{
+    font-size: 40px;
+}
+
+.user-signout div:last-child i{
+    font-size: 33px;
+}
+
+.user-signout {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+}
+
 .popuptext{
     font-size: 20px;
 }
@@ -226,6 +258,18 @@ span{
     color: #f8f9af;
     font-family: Italiana, sans-serif;
     font-size: 25px;
+}
+
+.login_signup.hidden {
+    display: none;
+}
+
+.user-signout.hidden {
+    display: none;
+}
+
+#log-out {
+    transform: rotateY(180deg);
 }
 
 #menu:hover {

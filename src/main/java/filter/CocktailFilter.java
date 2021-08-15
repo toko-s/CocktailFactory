@@ -14,6 +14,8 @@ public class CocktailFilter {
 
     private Rating ratingType;
 
+    private Order order;
+
     CocktailFilter(String name, Double rating, Rating ratingType) {
         this.name = name;
         this.rating = rating;
@@ -91,6 +93,11 @@ public class CocktailFilter {
         LOWER
     }
 
+    public enum Order{
+        ASCENDING,
+        DESCENDING
+    }
+
     public static class CocktailFilterBuilder {
         private String name;
         private Double rating;
@@ -122,6 +129,18 @@ public class CocktailFilter {
                     this.ratingType = Rating.HIGHER;
             } catch (Exception e) {
                 this.ratingType = null;
+            }
+            return this;
+        }
+
+        public CocktailFilterBuilder orderBy(String order) {
+            try {
+                if (order.equals("ASCENDING"))
+                    this.order = Order.ASCENDING;
+                else
+                    this.order = Order.DESCENDING;
+            } catch (Exception e) {
+                this.order = null;
             }
             return this;
         }
