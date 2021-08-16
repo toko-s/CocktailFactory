@@ -13,6 +13,7 @@
 </head>
 <body>
     <a href="/cocktails">Back to cocktails!</a>
+    <img src="cocktail_images/${cocktail.id}.jpg" alt="No picture">
     <li>${cocktail.name}
             ${cocktail.rating}
         <span class="fa fa-star ${cocktail.rating > 0 ? "checked" : ""}"></span>

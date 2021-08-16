@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<form method="POST" action="/addCocktail">
+<form method="POST" action="/addCocktail" enctype="multipart/form-data">
     <div>
         <label for="CocktailName">Cocktail Name <span> * </span></label>
         <input type="text" name="CocktailName" required/>
@@ -28,11 +28,10 @@
     <div class="ingredients">
         <c:forEach items='${requestScope.get("ings")}' var="ing">
             <div>
-                <input type="text" value='${ing.name} : none'
-                       readonly>
+                <input type="text" name="${ing.name}" value='${ing.name} : none' id='${ing.name}' readonly>
                 <input type="text" placeholder="ingredient amount">
-                <input type="button" value="Set Amount" class='set-amount'>
-                <input type="button" value="Clear Amount" class='clear-amount'>
+                <button class='set-amount'>Set Amount</button>
+                <button class="clear-amount">Clear Amount</button>
             </div>
         </c:forEach>
     </div>
