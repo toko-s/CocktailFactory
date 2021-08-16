@@ -177,6 +177,7 @@ public class CocktailDao {
     }
 
     public List<Cocktail> getTopDrinks() {
+    public List<Cocktail> getTopDrinks() {
         List<Cocktail> cocktails = new ArrayList<>();
 
         try {
