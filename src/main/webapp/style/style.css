@@ -8,6 +8,10 @@ body{
     background-size: contain;
 }
 
+.hidden{
+    display: none!important;
+}
+
 span{
     color: white;
     font-size: 20px;
@@ -47,6 +51,10 @@ span{
 
 .popuptext{
     font-size: 20px;
+}
+
+.my_page > .popuptext::after{
+    right: 15%!important;
 }
 
 .popup {

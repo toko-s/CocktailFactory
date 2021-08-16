@@ -27,13 +27,13 @@
             <span class="popuptext" id="myPopupSignUp">Sign Up</span>
         </div>
     </div>
-    <div class="user-signout ${applicationScope.get("user") == null ? "hidden" : ""}">
+    <div class="login_signup ${applicationScope.get("user") == null ? "hidden" : ""}">
         <div class="popup">
             <i id="log-out" class="fas fa-sign-out-alt"></i>
             <span class="popuptext" id="myPopupLogOut">Log Out</span>
         </div>
 
-        <div class="popup">
+        <div class="popup my_page">
             <i id="my-page" class="fas fa-user"></i>
             <span class="popuptext" id="myPopupMyPage">My Account</span>
         </div>
@@ -51,7 +51,7 @@
     <div class="top_drinks_list">
         <c:forEach items="${cocktails}" var="cocktail">
             <div class="scale">
-                <img src="assets/cocktails/Chambord.jpg">
+                <img src="cocktail_images/${cocktail.getId()}.jpg" onerror="this.src='assets/cocktails/no_photo.jpg'" />
                 <span>${cocktail.getName()}</span>
             </div>
         </c:forEach>
