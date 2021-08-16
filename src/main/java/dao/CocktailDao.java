@@ -2,6 +2,7 @@ package dao;
 
 import filter.CocktailFilter;
 import model.Cocktail;
+import model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -110,15 +111,13 @@ public class CocktailDao {
     }
 
 
-    public List<Cocktail> getUsersFavouriteCocktails(int userID, int offset, int quantity){
+    public List<Cocktail> getUsersFavouriteCocktails(int userID){
         List<Cocktail> cocktails = new ArrayList<>();
         try {
-            String userFavDrinks = "select cocktailID from users_fav_cocktails WHERE userID = ? limit ? offset ?" ;
+            String userFavDrinks = "select cocktailID from users_fav_cocktails WHERE userID = ?" ;
 
             PreparedStatement statement = con.prepareStatement(userFavDrinks);
             statement.setInt(1, userID);
-            statement.setInt(2, quantity);
-            statement.setInt(3, offset);
             ResultSet result = statement.executeQuery();
 
             String getCocktailByID = "select * from cocktails WHERE cocktailID = ?";
@@ -156,6 +155,21 @@ public class CocktailDao {
         }
 
         return cocktails;
+    }
+
+    public void updateUserInfo(User user){
+        try {
+            String userDrinks = "update users set username = ?, password = ?, name = ?, surname = ? WHERE userID = ?;";
+            PreparedStatement statement = con.prepareStatement(userDrinks);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getName());
+            statement.setString(4, user.getSurname());
+            statement.setInt(5, user.getId());
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public List<Cocktail> getTopDrinks(){

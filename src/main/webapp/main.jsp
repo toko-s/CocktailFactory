@@ -66,24 +66,24 @@
 
     <div class="top_drinks_list">
         <div class="scale">
-            <img src="assets/cocktails/Chambord.jpg">
-            <span>Chambord</span>
+            <img src="assets/bars/Beer_World.jpg">
+            <span>Beer World</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/Mojito.jpg">
-            <span>Mojito</span>
+            <img src="assets/bars/Dive_Bar.jpg">
+            <span>Dive Bar</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/Random.jpg">
-            <span>Random</span>
+            <img src="assets/bars/Divino.jpg">
+            <span>Divino</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/WhiteNegroni.jpg">
-            <span>White Negroni</span>
+            <img src="assets/bars/Kantora.jpg">
+            <span>Kantora</span>
         </div>
         <div class="scale">
-            <img src="assets/cocktails/WitchHeart.jpg">
-            <span>Witch Heart</span>
+            <img src="assets/bars/Warszawa.jpg">
+            <span>Warszawa</span>
         </div>
     </div>
 </div>
