@@ -14,6 +14,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+
+<form method="get" action="/cocktails">
+    <div id="name">
+        <label for="name"></label>
+        <input type="text" placeholder="name" name="name">
+    </div>
+    <div id="rating">
+        <label for="rating"></label>
+        <input type="number" placeholder="rating" name="rating" min="0" max="5" step="1">
+    </div>
+    <div>
+        <select name="rating-type">
+            <option value="HIGHER">higher</option>
+            <option value="LOWER">lower</option>
+        </select>
+    </div>
+    <div>
+        <input type="radio" id="order-asc" value="ASCENDING" name="order-by">
+        <label for="order-asc">Ascending</label>
+        <input type="radio" id="order-desc" value="DESCENDING" name="order-by">
+        <label for="order-desc">Descending</label>
+    </div>
+    <button type="submit">Search</button>
+</form>
 <ul>
     <c:forEach items='${requestScope.get("list")}' var='cocktail'>
         <li>${cocktail.name}

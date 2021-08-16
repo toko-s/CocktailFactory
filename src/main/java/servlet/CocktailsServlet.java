@@ -24,8 +24,12 @@ public class CocktailsServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-//        CocktailFilter filter = CocktailFilter.builder().build();
-        CocktailFilter filter = null;
+        CocktailFilter filter = CocktailFilter.builder()
+                .name(req.getParameter("name"))
+                .orderBy(req.getParameter("order-by"))
+                .ratingType(req.getParameter("rating-type"))
+                .rating(req.getParameter("rating"))
+                .build();
         List<Cocktail> cocktails = CocktailService.getCocktails(filter);
 
 
