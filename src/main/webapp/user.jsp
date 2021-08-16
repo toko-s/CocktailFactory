@@ -38,7 +38,7 @@
         <ul class="splide__list">
             <c:forEach items="${addedCocktails}" var="cocktail">
                 <li cocktailID = '1${cocktail.getId()}' class="splide__slide">
-                    <img src="cocktail_images/${cocktail.getId()}.jpg" alt="Image not found" onerror="this.src='assets/cocktails/no_photo.png';  document.querySelector(`[cocktailID = '1${cocktail.getId()}']`).classList.add('background_no_photo')"/>
+                    <img src="cocktail_images/${cocktail.getId()}.jpg" alt="Image not found" onerror="this.src='assets/cocktails/no_photo.png';  document.querySelector(`[cocktailID = '1${cocktail.getId()}']`).classList.add('background_no_photo'); "/>
                     <div class="cocktail_footer">
                         <span class="scale_name margin_left">${cocktail.getName()}</span>
                         <div class="right_side">

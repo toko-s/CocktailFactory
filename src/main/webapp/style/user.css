@@ -68,6 +68,13 @@ img{
     padding: 15px 0;
 }
 
+.space_between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .right_side{
     display: flex;
     justify-content: center;
