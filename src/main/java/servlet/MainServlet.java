@@ -27,6 +27,7 @@ public class MainServlet extends HttpServlet {
         CocktailDao dao = CocktailDao.getInstance();
         List<Cocktail> cocktails = dao.getTopDrinks();
         req.setAttribute("cocktails", cocktails);
+
         req.getRequestDispatcher("/main.jsp").forward(req,resp);
     }
 }
