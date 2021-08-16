@@ -11,25 +11,26 @@
 <html>
   <head>
     <title>Login</title>
-    <link rel="stylesheet" href="style/login.css" />
+    <link rel="stylesheet" href="./style/user.css">
   </head>
   <body>
     <a href="/register">Register </a>
-    <div class="container">
-      <form method="POST">
-        <div class="username">
-          <label for="username">Username</label>
-          <input type="text" name="username" value='${name}' /><br />
-        </div>
-        <div class="password">
-          <label for="password">Password</label>
-          <input type="password" name="password" /><br />
-        </div>
-        <div class="error">
-          <p class="error-text">${head}</p>
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+      <div class="confirm_password_body" style="height: 100%;">
+        <form method="POST" class="confirm_password">
+          <div class="username space_between">
+            <label for="username">Username</label>
+            <input class="input_password" type="text" name="username" value='${name}' /><br />
+          </div>
+          <div class="password space_between">
+            <label for="password">Password</label>
+            <input class="input_password" type="password" name="password" /><br />
+          </div>
+          <button class="submit_button" type="submit">Login</button>
+
+          <div class="wrong_password">
+            <p class="error-text">${head}</p>
+          </div>
+        </form>
+      </div>
   </body>
 </html>
