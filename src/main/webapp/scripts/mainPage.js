@@ -11,5 +11,5 @@ document.querySelector("#log-out").addEventListener('click', () => {
 });
 
 document.querySelector("#my-page").addEventListener('click', () => {
-    window.location ='/account';
+    window.location ='/user';
 });
