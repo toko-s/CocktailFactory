@@ -1,4 +1,30 @@
+.fa-heart {
+    color: dimgrey;
+    cursor: pointer;
+}
+
+.fa-heart.fav {
+    color: #ff1a23;
+}
+
+.fa-star {
+    color: dimgrey;
+    cursor: pointer;
+}
+
+.fa-star:hover {
+    transform: scale(1.2);
+}
+
+.fa-heart:hover {
+    transform: scale(1.2);
+}
+
 .checked {
-    color: #ffeb25
-;
+    color: #ffeb25;
+}
+
+img {
+    width: 10rem;
+    height: 10rem;
 }

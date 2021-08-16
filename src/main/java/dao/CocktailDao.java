@@ -142,6 +142,32 @@ public class CocktailDao {
         return cocktails;
     }
 
+    public boolean checkUsersFavouriteCocktail(int cocktailId, int userId) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("select COUNT(*) from users_fav_cocktails WHERE userID = ? AND cocktailID = ?");
+        statement.setInt(1,userId);
+        statement.setInt(2,cocktailId);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+        return false;
+    }
+
+    public void setUsersFavouriteCocktail(int userId, int cocktailId, boolean val) throws SQLException {
+        PreparedStatement statement = null;
+        if(val) {
+            statement = con.prepareStatement("INSERT INTO users_fav_cocktails (userID, cocktailID)" +
+                    "values (?,?)");
+        } else {
+                 statement = con.prepareStatement("DELETE FROM users_fav_cocktails" +
+                        " WHERE userID = ? AND cocktailID = ?");
+        }
+        statement.setInt(1, userId);
+        statement.setInt(2, cocktailId);
+        statement.executeUpdate();
+    }
+
+
     public List<Cocktail> getUsersCocktails(int userID){
         List<Cocktail> cocktails = new ArrayList<>();
         try {
@@ -206,6 +232,15 @@ public class CocktailDao {
         curr.setId(result.getInt("cocktailID"));
         curr.setIngredients(dao.getIngredientsByCocktailId(result.getInt(1)));
         return curr;
+    }
+
+    public void saveCocktail(int cocktailId, double rating, int voters) throws SQLException {
+        System.out.println(voters);
+        PreparedStatement statement = con.prepareStatement("UPDATE cocktails SET rating = ?, voters=? WHERE cocktailID=?");
+        statement.setDouble(1,rating);
+        statement.setInt(2, voters);
+        statement.setInt(3, cocktailId);
+        statement.executeUpdate();
     }
 }
 

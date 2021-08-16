@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style/style.css">
     <script src="scripts/login.js" defer></script>
-    <script src="scripts/cocktails.js" defer></script>
     <script src="scripts/mainPage.js" defer></script>
 </head>
 <body>

@@ -17,4 +17,6 @@ public class Cocktail {
     private double rating;
     private int voters;
     private List<Ingredient> ingredients;
+    private boolean isFavourite;
+
 }

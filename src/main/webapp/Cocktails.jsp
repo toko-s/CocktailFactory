@@ -12,6 +12,7 @@
     <title>Cocktails</title>
     <link rel="stylesheet" href="style/cocktails.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="scripts/cocktails.js" defer></script>
 </head>
 <body>
 
@@ -38,26 +39,32 @@
     </div>
     <button type="submit">Search</button>
 </form>
+
+<p hidden id="userID">${applicationScope.get("user").id}</p>
+
 <ul>
     <c:forEach items='${requestScope.get("list")}' var='cocktail'>
-        <li>${cocktail.name}
-                ${cocktail.rating}
-            <span class="fa fa-star ${cocktail.rating > 0 ? "checked" : ""}"></span>
-            <span class="fa fa-star ${cocktail.rating > 1 ? "checked" : ""}"></span>
-            <span class="fa fa-star ${cocktail.rating > 2 ? "checked" : ""}"></span>
-            <span class="fa fa-star ${cocktail.rating > 3 ? "checked" : ""}"></span>
-            <span class="fa fa-star ${cocktail.rating > 4 ? "checked" : ""}"></span>
-            <span class="voters">(${cocktail.voters})</span>
-            <img src="cocktail_images/${cocktail.id}.jpg" alt="No picture">
-            <form method="get" action="/cocktailpage">
-                <button>
-                    details
-                    <input type="hidden" name="id" value=${cocktail.id}/>
-                </button>
-            </form>
-
+        <li>
+            <div class="cocktail">
+                <span hidden id="${cocktail.id}"></span>
+                <span>${cocktail.name}</span>
+                <span>${cocktail.rating}</span>
+                <span class="fa fa-star ${cocktail.rating > 0 ? "checked" : ""} 0"></span>
+                <span class="fa fa-star ${cocktail.rating > 1 ? "checked" : ""} 1"></span>
+                <span class="fa fa-star ${cocktail.rating > 2 ? "checked" : ""} 2"></span>
+                <span class="fa fa-star ${cocktail.rating > 3 ? "checked" : ""} 3"></span>
+                <span class="fa fa-star ${cocktail.rating > 4 ? "checked" : ""} 4"></span>
+                <span class="voters">(${cocktail.voters})</span>
+                <img src="cocktail_images/${cocktail.id}.jpg" alt="No picture">
+                <span class='fa fa-heart ${cocktail.favourite ? "fav" : ""}'></span>
+                <form method="get" action="/cocktailpage">
+                    <button>
+                        details
+                        <input type="hidden" name="id" value='${cocktail.id}'/>
+                    </button>
+                </form>
+            </div>
         </li>
-
     </c:forEach>
 </ul>
 </body>
