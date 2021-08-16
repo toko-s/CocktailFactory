@@ -29,6 +29,28 @@ body{
     margin-left: 25px;
 }
 
+a{
+    text-decoration: none;
+}
+
+.no_cocktail_message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 0 30px #735a3c;
+    border-radius: 20px;
+    margin: 30px 20px;
+    height: 30vh;
+    font-size: 40px;
+}
+
+.background_no_photo{
+    background-size: contain!important;
+    background-repeat: no-repeat;
+    background-color: hsl(44, 79%, 89%)!important;
+}
+
 img{
     border-radius: 20px;
     width: 160px;
@@ -44,6 +66,13 @@ img{
     bottom: 0;
     background: hsl(0, 0%, 0%, 0.8);
     padding: 15px 0;
+}
+
+.space_between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .right_side{

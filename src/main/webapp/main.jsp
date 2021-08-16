@@ -50,7 +50,7 @@
     <div class="top_drinks_list">
         <c:forEach items="${cocktails}" var="cocktail">
             <div class="scale">
-                <img src="cocktail_images/${cocktail.getId()}.jpg" onerror="this.src='assets/cocktails/no_photo.jpg'" />
+                <img src="cocktail_images/${cocktail.getId()}.jpg" onerror="this.src='assets/cocktails/no_photo.png '" />
                 <span>${cocktail.getName()}</span>
             </div>
         </c:forEach>
