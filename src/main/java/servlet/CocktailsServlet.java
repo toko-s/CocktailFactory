@@ -6,6 +6,7 @@ import dao.UserDao;
 import filter.CocktailFilter;
 import lombok.SneakyThrows;
 import model.Cocktail;
+import model.User;
 import service.CocktailService;
 
 import javax.servlet.Filter;
@@ -24,11 +25,22 @@ public class CocktailsServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-//        CocktailFilter filter = CocktailFilter.builder().build();
-        CocktailFilter filter = null;
+        CocktailFilter filter = CocktailFilter.builder()
+                .name(req.getParameter("name"))
+                .orderBy(req.getParameter("order-by"))
+                .ratingType(req.getParameter("rating-type"))
+                .rating(req.getParameter("rating"))
+                .build();
+
         List<Cocktail> cocktails = CocktailService.getCocktails(filter);
 
-
+        User u = (User) req.getServletContext().getAttribute("user");
+        if(u != null) {
+            for (Cocktail cocktail : cocktails) {
+                if(CocktailService.checkFavourite(cocktail.getId(),u.getId()))
+                    cocktail.setFavourite(true);
+            }
+        }
         req.setAttribute("list",cocktails);
         req.getRequestDispatcher("/Cocktails.jsp").forward(req,resp);
     }

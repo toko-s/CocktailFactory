@@ -23,4 +23,25 @@ public class CocktailService {
         CocktailDao dao = CocktailDao.getInstance();
         return dao.addCocktail(cocktail);
     }
+
+    public static boolean checkFavourite(int cocktailId, int userId) throws SQLException {
+        CocktailDao dao = CocktailDao.getInstance();
+        return dao.checkUsersFavouriteCocktail(cocktailId,userId);
+    }
+
+    public static void renewFavourite(int userId,int cocktailId, boolean val) throws SQLException {
+        CocktailDao dao = CocktailDao.getInstance();
+        dao.setUsersFavouriteCocktail(userId,cocktailId,val);
+    }
+
+    public static void voteFromUser(int id, int cocktailId, int vote) throws SQLException {
+        CocktailDao dao = CocktailDao.getInstance();
+        Cocktail cocktail = dao.getCocktailById(cocktailId);
+        int voters = cocktail.getVoters();
+        double rating = cocktail.getRating();
+        rating = (rating * voters + vote)/(voters + 1);
+        cocktail.setVoters(voters + 1);
+        cocktail.setRating(rating);
+        dao.saveCocktail(cocktail.getId(), rating, voters + 1);
+    }
 }

@@ -25,7 +25,7 @@
     </li>
 
     <c:forEach items='${cocktail.ingredients}' var='ingredient'>
-        <p>${ingredient}</p>
+        <p>${ingredient.name}</p>
     </c:forEach>
 
 </body>

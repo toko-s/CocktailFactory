@@ -13,3 +13,7 @@ document.querySelector("#log-out").addEventListener('click', () => {
 document.querySelector("#my-page").addEventListener('click', () => {
     window.location ='/user';
 });
+
+document.querySelector('#menu').addEventListener('click',() => {
+    window.location = '/cocktails'
+})
