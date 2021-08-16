@@ -55,7 +55,7 @@
                 <span class="fa fa-star ${cocktail.rating > 3 ? "checked" : ""} 3"></span>
                 <span class="fa fa-star ${cocktail.rating > 4 ? "checked" : ""} 4"></span>
                 <span class="voters">(${cocktail.voters})</span>
-                <img src="cocktail_images/${cocktail.id}.jpg" alt="No picture">
+                <img src="cocktail_images/${cocktail.id}.jpg" alt="No picture" onerror="this.src='assets/cocktails/no_photo.png'">
                 <span class='fa fa-heart ${cocktail.favourite ? "fav" : ""}'></span>
                 <form method="get" action="/cocktailpage">
                     <button>

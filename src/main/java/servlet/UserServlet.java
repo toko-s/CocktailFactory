@@ -17,8 +17,12 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CocktailDao dao = CocktailDao.getInstance();
         User user = (User)req.getServletContext().getAttribute("user");
+        if(user==null){
+            resp.sendRedirect("/login");
+            return;
+        }
+        CocktailDao dao = CocktailDao.getInstance();
         List<Cocktail> addedDrinks = dao.getUsersCocktails(user.getId());
         List<Cocktail> favDrinks = dao.getUsersFavouriteCocktails(user.getId());
         req.setAttribute("addedCocktails", addedDrinks);

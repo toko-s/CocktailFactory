@@ -237,7 +237,7 @@ public class CocktailDao {
     public void saveCocktail(int cocktailId, double rating, int voters) throws SQLException {
         System.out.println(voters);
         PreparedStatement statement = con.prepareStatement("UPDATE cocktails SET rating = ?, voters=? WHERE cocktailID=?");
-        statement.setDouble(1,rating);
+        statement.setDouble(1, Double.parseDouble(String.format("%.2f",rating)));
         statement.setInt(2, voters);
         statement.setInt(3, cocktailId);
         statement.executeUpdate();
