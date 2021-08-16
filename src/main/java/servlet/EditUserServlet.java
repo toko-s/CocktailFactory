@@ -45,7 +45,7 @@ public class EditUserServlet extends HttpServlet {
 
         CocktailDao dao = CocktailDao.getInstance();
         dao.updateUserInfo(userUpdated);
-
+        req.getServletContext().setAttribute("user", userUpdated);
         resp.sendRedirect("/user");
     }
 }

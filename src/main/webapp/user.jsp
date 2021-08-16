@@ -16,10 +16,14 @@
     <div class="title">${user.getName()} ${user.getSurname()}'s corner</div>
 
    <div class="header_right_side">
-       <div class="add_cocktail">
+       <a class="add_cocktail" href="/main">
+           <i class="fas fa-home" style="margin-top: 0"></i>
+       </a>
+
+       <a class="add_cocktail" href="/addCocktail">
            <i class="fas fa-glass-martini-alt"></i>
            <i class="fas fa-plus"></i>
-       </div>
+       </a>
 
        <a class="edit_user" href="/confirmPassword">
            <i class="fas fa-user-edit"></i>
@@ -29,12 +33,45 @@
 
 <span class="spline_title">My Cocktails</span>
 
-<div id="one" class="splide">
+<div id="one" class="splide ${addedCocktails.size() == 0 ? "hidden" : ""}">
     <div class="splide__track">
         <ul class="splide__list">
             <c:forEach items="${addedCocktails}" var="cocktail">
-                <li class="splide__slide">
-                    <img src="assets/cocktails/Random.jpg">
+                <li cocktailID = '1${cocktail.getId()}' class="splide__slide">
+                    <img src="cocktail_images/${cocktail.getId()}.jpg" alt="Image not found" onerror="this.src='assets/cocktails/no_photo.png';  document.querySelector(`[cocktailID = '1${cocktail.getId()}']`).classList.add('background_no_photo')"/>
+                    <div class="cocktail_footer">
+                        <span class="scale_name margin_left">${cocktail.getName()}</span>
+                        <div class="right_side">
+                            <div class="rating">
+                                <i class="far fa-smile ${cocktail.getRating() > 3.5 ? "" : "hidden"}"></i>
+                                <i class="far fa-meh ${cocktail.getRating() > 1.5 && cocktail.getRating() <= 3.5 ? "" : "hidden"}"></i>
+                                <i class="far fa-frown ${cocktail.getRating() <= 1.5 ? "" : "hidden"}"></i>
+                                <span>${cocktail.getRating()}</span>
+                            </div>
+
+                            <div>
+                                <i class="fas fa-user-check"></i>
+                                <span>${cocktail.getVoters()}</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+</div>
+<div class="no_cocktail_message ${addedCocktails.size() != 0 ? "hidden" : ""}">
+    You don't have any cocktails
+</div>
+
+
+<span class="spline_title">Favourite Cocktails</span>
+<div id="two" class="splide two ${favCocktails.size() == 0 ? "hidden" : ""}">
+    <div class="splide__track">
+        <ul class="splide__list">
+            <c:forEach items="${favCocktails}" var="cocktail">
+                <li cocktailID = '2${cocktail.getId()}' class="splide__slide">
+                    <img src="cocktail_images/${cocktail.getId()}.jpg" alt="Image not found" onerror="this.src='assets/cocktails/no_photo.png';  document.querySelector(`[cocktailID = '2${cocktail.getId()}']`).classList.add('background_no_photo')"/>
                     <div class="cocktail_footer">
                         <span class="scale_name margin_left">${cocktail.getName()}</span>
                         <div class="right_side">
@@ -57,34 +94,8 @@
     </div>
 </div>
 
-
-<span class="spline_title">Favourite Cocktails</span>
-<div id="two" class="splide two">
-    <div class="splide__track">
-        <ul class="splide__list">
-            <c:forEach items="${favCocktails}" var="cocktail">
-                <li class="splide__slide">
-                    <img src="assets/cocktails/Random.jpg">
-                    <div class="cocktail_footer">
-                        <span class="scale_name margin_left">${cocktail.getName()}</span>
-                        <div class="right_side">
-                            <div class="rating">
-                                <i class="far fa-smile ${cocktail.getRating() > 3.5 ? "" : "hidden"}"></i>
-                                <i class="far fa-meh ${cocktail.getRating() > 1.5 && cocktail.getRating() <= 3.5 ? "" : "hidden"}"></i>
-                                <i class="far fa-frown ${cocktail.getRating() <= 1.5 ? "" : "hidden"}"></i>
-                                <span>${cocktail.getRating()}</span>
-                            </div>
-
-                            <div>
-                                <i class="fas fa-user-check"></i>
-                                <span>${cocktail.getVoters()}</span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </c:forEach>
-        </ul>
-    </div>
+<div class="no_cocktail_message ${favCocktails.size() != 0 ? "hidden" : ""}">
+    You don't have any favourite cocktails
 </div>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
